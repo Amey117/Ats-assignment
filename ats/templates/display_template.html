@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<button class="btn btn-secondary"
+data-bs-toggle="modal"
+data-bs-target="#dynamicModal"
+hx-get="{% url 'applicant-add_applicant_form'%}"
+hx-swap="innerHTML"
+hx-target="#modalBody"
+>Add Candidate</button>
+
+<div class="mt-5">
+    <input class="p-2" type="text"
+    hx-get="{{search_url}}" 
+    hx-target="#candidates-list"
+    hx-swap="innerhtml"
+    hx-trigger="load once, keyup[which==13] from:body,focusout,refresh_list from:body" 
+    hx-vals='{"sq": ""}'
+    oninput="this.setAttribute('hx-vals', JSON.stringify({sq: this.value}))" 
+    placeholder="search candidates ..." >
+</div><br><br>
+
+
+<div id="candidates-list">
+
+</div>
+
+
+
+<!-- modal -->
+<div class="modal fade" id="dynamicModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" id="modalBody">
+          <!-- HTMX will load the API content here -->
+          Loading...
+        </div>
+      </div>
+    </div>
+</div>
+  
+
+{% endblock %}

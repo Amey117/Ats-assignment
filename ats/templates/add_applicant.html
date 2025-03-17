@@ -1,0 +1,30 @@
+<form id="AddApplicantForm" hx-post="{% url 'applicant-add_applicant' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="none">
+    <h5>Add Candidate </h5><br>
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" min="0" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" name="phone_number" pattern="[0-9]{10}" required><br><br>
+
+    <input class="btn btn-success" id="addCandidate" type="submit" data-bs-dismiss="modal" value="Add Candidate">
+    <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+</form>
+
+<script>
+    // Initialize the validation logic for this specific form
+    activateButtonOnFormValidation("AddApplicantForm", "addCandidate");
+</script>

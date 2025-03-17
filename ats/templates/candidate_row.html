@@ -1,0 +1,22 @@
+<ul class="list-group">
+    {% if applicants|length > 0 %}
+
+        {% for applicant in applicants %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div>{{applicant.name | title}}</div>
+                </div>
+                    <i class="fa-solid fa-trash" hx-delete="{{applicant.delete_applicant_url}}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="none" style="cursor: pointer;"></i>&nbsp;&nbsp;&nbsp;
+                    <button 
+                    data-bs-toggle="modal"
+                    data-bs-target="#dynamicModal"
+                    hx-get="{% url 'applicant-edit_applicant_form' candidate_id=applicant.id %}"
+                    hx-target="#modalBody"
+                    hx-swap="innerHTML"> <i class="fa-solid fa-pencil"  style="cursor: pointer;" ></i></button>
+                </li>
+        {% endfor %}
+
+        {% else %}
+                <h4>No Candidates found</h4>
+        {% endif %}
+</ul>

@@ -1,0 +1,31 @@
+
+<form id="EditApplicantForm" hx-patch="{% url 'applicant-edit_applicant' candidate_id=applicant.id %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-swap="none">
+    <h5>Edit Candidate </h5><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" value="{% if applicant.name %}{{applicant.name}}{% endif %}" name="name" required><br><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" value="{% if applicant.age %}{{applicant.age}}{% endif %}" name="age" min="0" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option {% if applicant.gender == 'male' %}selected{% endif %} value="male">Male</option>
+        <option {% if applicant.gender == 'female' %}selected{% endif %} value="female">Female</option>
+    </select><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" value="{% if applicant.email %}{{applicant.email}}{% endif %}" name="email" required><br><br>
+
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" value="{% if applicant.phone_number %}{{applicant.phone_number}}{% endif %}" name="phone_number" pattern="[0-9]{10}" required><br><br>
+
+    <input id="editCandidate" class="btn btn-success" data-bs-dismiss="modal" type="submit" value="Edit Data">
+    <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+</form>
+
+
+<script>
+    // Initialize the validation logic for this specific form
+    activateButtonOnFormValidation("EditApplicantForm", "editCandidate");
+</script>
