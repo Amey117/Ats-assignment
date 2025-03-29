@@ -13,6 +13,7 @@ class ATSHome(viewsets.ViewSet):
     """
     Ats Home route renders the base html
     """
+    permission_classes=[AllowAny]
 
     @action(detail=False, methods=["get"], url_path="home", url_name="ats_home")
     def ats_home(self, request):
@@ -35,6 +36,9 @@ class Applicants(viewsets.ViewSet):
         Delete
         Serach
     """
+
+    permission_classes=[AllowAny]
+
 
     @action(
         detail=False,
